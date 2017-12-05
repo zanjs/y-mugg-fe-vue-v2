@@ -11,6 +11,16 @@
         <Button type="primary" @click="refresh" shape="circle" ><Icon type="ios-loop-strong"></Icon> 刷新</Button>
         <Button type="success" shape="circle" >共 ：{{warerooms.length}} 仓库</Button>
         <Button type="success" shape="circle" >共 ：{{products.length}} 产品</Button>
+
+        <span style="padding-left:10px;">
+            平均天数：
+        </span>
+        <span style="padding-left:3px;">
+            <Select v-model="selectDay" @on-change="changeSelectDay" style="width:100px">
+                <Option v-for="item in select" :value="item.value" :key="item.value">{{ item.label }}</Option>
+            </Select>
+        </span>
+       
         </div>
         <div class="show-span" >
           <span class="health">
@@ -90,6 +100,33 @@
     data () {
       return {
         dateVal: [],
+        selectDay: 30,
+        select: [
+          {
+            value: 5,
+            label: 5
+          },
+          {
+            value: 7,
+            label: 7
+          },
+          {
+            value: 10,
+            label: 10
+          },
+          {
+            value: 15,
+            label: 15
+          },
+          {
+            value: 30,
+            label: 30
+          },
+          {
+            value: 40,
+            label: 40
+          }
+        ],
         searchState: false,
         editModal: false,
         detailModal: false,
@@ -159,6 +196,14 @@
         params.end_time = e[1]
         this.params = params
         console.log(params)
+        this.getData(params)
+      },
+      // 选择 平均值周期天数
+      changeSelectDay (e) {
+        console.log(e)
+        var params = this.params
+        params.day = e
+        this.params = params
         this.getData(params)
       }
     },
