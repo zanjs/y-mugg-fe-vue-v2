@@ -24,16 +24,13 @@
         </div>
         <div class="show-span" >
           <span class="health">
-            健康状态 > 200
+            健康状态 > 30
           </span>
           <span class="blue">
-           50 > 库存减销量 < 200
-          </span>
-           <span class="yellow">
-           库存紧张状态 <= 50
+           30 > 适中 > 10
           </span>
           <span class="red">
-            销量大于库存
+            销量紧张 < 10
           </span>
           <span class="gray">
            库存 = 0
@@ -60,19 +57,16 @@
                 {{ pro.product.title }}  
               </td>
               <td v-for="excel in pro.product_sattistics" :key="excel.created_at+excel.inventory_quantity">
-                <span v-if="excel.sales_quantity > excel.inventory_quantity" class="red">
+                <span v-if="excel.inventory_quantity == 0" class="gray">
+                  （{{ excel.inventory_quantity }} / {{ excel.sales_quantity}} 
+                </span>
+                <span v-else-if="excel.average > 30 " class="health">
                   （{{ excel.inventory_quantity }} / {{ excel.sales_quantity}} ）
                 </span>
-                <span v-else-if="excel.inventory_quantity - excel.sales_quantity > 200" class="health">
+                <span v-else-if="excel.average > 10" class="blue">
                   （{{ excel.inventory_quantity }} / {{ excel.sales_quantity}} ）
                 </span>
-                <span v-else-if="excel.inventory_quantity - excel.sales_quantity > 50" class="blue">
-                  （{{ excel.inventory_quantity }} / {{ excel.sales_quantity}} ）
-                </span>
-                <span v-else-if="excel.inventory_quantity == 0" class="gray">
-                  （{{ excel.inventory_quantity }} / {{ excel.sales_quantity}} ）
-                </span>
-                <span v-else class="yellow">
+                <span v-else class="red">
                   （{{ excel.inventory_quantity }} / {{ excel.sales_quantity}} ）
                 </span>
               </td>
@@ -173,12 +167,13 @@
       },
       getData (params) {
         this.loading2 = true
+        const selectDay = this.selectDay
         this.$api.statistics(params).then((res) => {
           console.log(res)
           if (!res.error) {
             const data = res.data
             this.warerooms = data.warerooms
-            const products = filterProduct.excel(data.products)
+            const products = filterProduct.excel(data.products, selectDay)
             this.products = products
             this.DateReady = true
             this.loading2 = false
@@ -203,6 +198,7 @@
         console.log(e)
         var params = this.params
         params.day = e
+        this.selectDay = e
         this.params = params
         this.getData(params)
       }

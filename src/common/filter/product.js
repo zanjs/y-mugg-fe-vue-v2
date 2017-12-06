@@ -1,5 +1,5 @@
 export default {
-  excel (product) {
+  excel (product, selectDay) {
     const data = product
     const len = data.length
     const vm = this
@@ -10,17 +10,15 @@ export default {
       // const product = item.product
       // item.product_title = product.title
       const productSattistics = item.product_sattistics
-      item.toal = vm.quantityTotal(productSattistics)
-
+      item.toal = vm.quantityTotal(productSattistics, selectDay)
       arr.push(item)
     }
-    console.log(arr)
     return arr
   },
-  quantityTotal (productExcelQuantity) {
+  quantityTotal (productExcelQuantity, selectDay) {
     const warerooms = productExcelQuantity
     const len = warerooms.length
-    console.log(warerooms)
+    // console.log(warerooms)
     let i
     const toal = {'quantity': 0, 'sales': 0}
     let quantity = 0
@@ -29,6 +27,11 @@ export default {
       const item = warerooms[i]
       quantity += item.inventory_quantity
       sales += item.sales_quantity
+
+      const mean = item.mean
+      const average = mean / selectDay
+      item.average = average
+      console.log(average)
     }
 
     toal.quantity = quantity

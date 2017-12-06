@@ -16,7 +16,7 @@ export default function fetch (options) {
   return new Promise((resolve, reject) => {
     const instance = axios.create({
       baseURL: SERVER_BASE_URL,
-      timeout: 25000,
+      timeout: 295000,
       headers: {}
     })
 
