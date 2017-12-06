@@ -123,7 +123,7 @@
         columns1: [
           {
             title: '同步时间',
-            key: 'created_at',
+            key: 'updated_at',
             sortable: true
           },
           {
@@ -263,6 +263,7 @@
             for (i = 0; i < len; i++) {
               const item = list[i]
               item.created_at = timeAgo(item.created_at)
+              item.updated_at = timeAgo(item.updated_at)
                 // arr.push(item)
             }
             if (res.page.count) {

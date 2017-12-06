@@ -97,7 +97,7 @@
         columns1: [
           {
             title: '同步时间',
-            key: 'created_at',
+            key: 'updated_at',
             sortable: true
           },
           {
@@ -227,6 +227,7 @@
             // const arr = []
             for (i = 0; i < len; i++) {
               const item = list[i]
+              item.updated_at = timeAgo(item.updated_at)
               item.created_at = timeAgo(item.created_at)
               item.product_title = item.product.title
               item.wareroom_title = item.wareroom.title
