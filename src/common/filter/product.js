@@ -29,7 +29,7 @@ export default {
       sales += item.sales_quantity
 
       const mean = item.mean
-      const average = mean / selectDay
+      const average = item.inventory_quantity / (mean / selectDay)
       item.average = average
       console.log(average)
     }

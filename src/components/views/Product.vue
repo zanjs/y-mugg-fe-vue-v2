@@ -66,14 +66,20 @@
       </p>
       <div style="text-align:center">
         <Form :model="formItem" :label-width="80">
+           <Form-item label="排序号">
+            <Input v-model="currDate.sort" placeholder="请输入"></Input>
+          </Form-item>
           <Form-item label="商品名称">
             <Input v-model="currDate.title" placeholder="请输入"></Input>
           </Form-item>
           <Form-item label="外部编码">
             <Input v-model="currDate.external_code" placeholder="请输入"></Input>
           </Form-item>
-          <Form-item label="排序号">
-            <Input v-model="currDate.sort" placeholder="请输入"></Input>
+          <Form-item label="每箱数量">
+            <Input v-model="currDate.box" placeholder="请输入"></Input>
+          </Form-item>
+          <Form-item label="托运基数">
+            <Input v-model="currDate.exceed" placeholder="请输入"></Input>
           </Form-item>
         </Form>
       </div>
@@ -140,7 +146,16 @@
           {
             title: '外部编码',
             key: 'external_code'
-          }, {
+          },
+          {
+            title: '每箱数量',
+            key: 'box'
+          },
+          {
+            title: '托运基数',
+            key: 'exceed'
+          },
+          {
             title: '操作',
             key: 'action',
             width: 120,

@@ -6,11 +6,18 @@
         <div slot="title">
           <Button type="primary" @click="refresh" shape="circle" ><Icon type="ios-loop-strong"></Icon> 刷新</Button>
           <Button type="success" shape="circle" >共 ：{{count}} 条数据</Button>
+          <Col span="6" style="padding-right:10px">
+            <Select clearable="true"  filterable @on-change="changeWareroom" >
+                <Option v-for="item in warerooms" :value="item.id" :key="item.id">{{ item.title }}</Option>
+            </Select>
+          </Col>
+          <Col span="6" style="padding-right:10px">
+            <Select clearable="true"  filterable @on-change="changeProduct" >
+                <Option v-for="item in products" :value="item.id" :key="item.id">{{ item.title }}</Option>
+            </Select>
+          </Col>
         </div>
 
-        <a href="#" slot="extra" @click.prevent="refresh">
-          <Icon type="ios-loop-strong"></Icon>
-        </a>
         <Table :loading="loading2" :show-header="showHeader" :height="fixedHeader ? 300 : ''" :size="tableSize"
                :data="listData"
                :columns="columns1" ref="table" @on-select="onSelect" @on-selection-change="onSelectionChange"></Table>
@@ -74,6 +81,9 @@
           radio: '',
           checkbox: []
         },
+        wareroom: {},
+        warerooms: [],
+        products: [],
         searchState: false,
         editModal: false,
         detailModal: false,
@@ -245,6 +255,36 @@
           }
         })
       },
+      getProducts () {
+        this.$api.productList({}).then((res) => {
+          if (res) {
+            this.products = res
+            this.DateReady = true
+          } else {
+            this.$Message.error(res.msg)
+          }
+        })
+      },
+      getWarerooms () {
+        this.$api.wareroomList({}).then((res) => {
+          if (res) {
+            this.warerooms = res
+            this.DateReady = true
+          } else {
+            this.$Message.error(res.msg)
+          }
+        })
+      },
+      changeWareroom (e) {
+        console.log(e)
+        this.params.wareroom_id = e
+        this.getData(this.params)
+      },
+      changeProduct (e) {
+        console.log(e)
+        this.params.product_id = e
+        this.getData(this.params)
+      },
       /**
        * @on-change 页码改变的回调，返回改变后的页码
        * */
@@ -330,6 +370,8 @@
     },
     created () {
       this.getData(this.params)
+      this.getWarerooms()
+      this.getProducts()
     },
     mounted () {
       erd.listenTo(window, 'resize', this.handleResize)

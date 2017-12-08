@@ -68,9 +68,9 @@ const inventoryList = params => {
 
 const saleList = params => {
   return fetch({
-    url: `/v1/sales?limit=${params.limit}&offset=${params.offset}`,
+    url: `/v1/sales`,
     method: 'get',
-    params: ''
+    params: params
   })
 }
 
@@ -101,17 +101,17 @@ const recordUpdate = params => {
 
 const productList = params => {
   return fetch({
-    url: `/v1/products?limit=${params.limit}&page=${params.page}`,
+    url: `/v1/products`,
     method: 'get',
-    params: ''
+    params: params
   })
 }
 
 const wareroomList = params => {
   return fetch({
-    url: `/v1/warerooms?limit=${params.limit}&page=${params.page}`,
+    url: `/v1/warerooms`,
     method: 'get',
-    params: ''
+    params: params
   })
 }
 
