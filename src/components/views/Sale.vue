@@ -7,12 +7,12 @@
           <Button type="primary" @click="refresh" shape="circle" ><Icon type="ios-loop-strong"></Icon> 刷新</Button>
           <Button type="success" shape="circle" >共 ：{{count}} 条数据</Button>
           <Col span="6" style="padding-right:10px">
-            <Select clearable="true"  filterable @on-change="changeWareroom" >
+            <Select clearable  filterable @on-change="changeWareroom" >
                 <Option v-for="item in warerooms" :value="item.id" :key="item.id">{{ item.title }}</Option>
             </Select>
           </Col>
           <Col span="6" style="padding-right:10px">
-            <Select clearable="true"  filterable @on-change="changeProduct" >
+            <Select clearable  filterable @on-change="changeProduct" >
                 <Option v-for="item in products" :value="item.id" :key="item.id">{{ item.title }}</Option>
             </Select>
           </Col>
@@ -81,7 +81,6 @@
           radio: '',
           checkbox: []
         },
-        wareroom: {},
         warerooms: [],
         products: [],
         searchState: false,

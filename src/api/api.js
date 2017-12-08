@@ -60,9 +60,9 @@ const statistics = params => {
 // 库存
 const inventoryList = params => {
   return fetch({
-    url: `/v1/inventorys?limit=${params.limit}&offset=${params.offset}`,
+    url: `/v1/inventorys`,
     method: 'get',
-    params: ''
+    params: params
   })
 }
 
@@ -76,9 +76,9 @@ const saleList = params => {
 
 const recordList = params => {
   return fetch({
-    url: `/v1/records?limit=${params.limit}&offset=${params.offset}`,
+    url: `/v1/records`,
     method: 'get',
-    params: ''
+    params: params
   })
 }
 
@@ -163,14 +163,6 @@ const wareroomDelete = params => {
   })
 }
 
-const articleList = params => {
-  return fetch({
-    url: `/api/search/query/listview/category/Android/count/${params.limit}/page/${params.page}`,
-    method: 'get',
-    params: ''
-  })
-}
-
 const userList = params => {
   return fetch({
     url: '/api/person/getPersonListByCompany',
@@ -221,7 +213,6 @@ const apiList = {
   wareroomUpdate,
   productDelete,
   wareroomDelete,
-  articleList,
   userList,
   postUserInfo,
   checkToken

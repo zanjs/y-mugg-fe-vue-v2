@@ -123,8 +123,7 @@
         saveDisabled: false,
         params: {
           page: 1,
-          limit: 10,
-          category: 'Android'
+          limit: 10
         },
         selection: [], // 表格选中项
         listData: [], // @:data
