@@ -14,6 +14,7 @@ const Product = () => import('@/components/views/Product')
 const Wareroom = () => import('@/components/views/Wareroom')
 const Inventory = () => import('@/components/views/Inventory.vue')
 const Sale = () => import('@/components/views/Sale')
+const Transport = () => import('@/components/views/Transport')
 const Statistics = () => import('@/components/views/Statistics')
 const Filter = () => import('@/components/pages/Filter')
 const Lock = () => import('@/components/layout/base/Lock')
@@ -79,6 +80,14 @@ const routes = [
         path: '/sale',
         name: '销量',
         component: Sale,
+        meta: {
+          requiresAuth: true // 是否需要登录
+        }
+      },
+      {
+        path: '/transport',
+        name: '托运',
+        component: Transport,
         meta: {
           requiresAuth: true // 是否需要登录
         }

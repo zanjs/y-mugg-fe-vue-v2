@@ -40,6 +40,14 @@ const menu = [
     fixed: false
   },
   {
+    path: '/transport',
+    name: '拖运',
+    icon: 'icon-flag_fill',
+    level: 1,
+    children: [],
+    fixed: false
+  },
+  {
     path: '/statistics',
     name: '统计',
     icon: 'icon-flip',

@@ -1,14 +1,5 @@
 import fetch from './fetch.js'
 
-// // 登录
-// export function login (data) {
-//   return fetch({
-//     url: `''`,
-//     method: 'post',
-//     data
-//   })
-// }
-
 const Login = data => {
   return fetch({
     url: `/v1/login`,
@@ -16,13 +7,6 @@ const Login = data => {
     data
   })
 }
-// // 登出
-// export function logout () {
-//   return fetch({
-//     url: '',
-//     method: 'post'
-//   })
-// }
 
 const syncQnventory = params => {
   return fetch({
@@ -69,6 +53,14 @@ const inventoryList = params => {
 const saleList = params => {
   return fetch({
     url: `/v1/sales`,
+    method: 'get',
+    params: params
+  })
+}
+
+const transportList = params => {
+  return fetch({
+    url: `/v1/transports`,
     method: 'get',
     params: params
   })
@@ -171,29 +163,6 @@ const userList = params => {
   })
 }
 
-/**
- * 提交用户注册信息
- * @param params
- */
-const postUserInfo = params => {
-  return fetch({
-    url: '',
-    method: 'post',
-    data: params
-  })
-}
-
-/**
- * 验证邮箱 token是否过期
- * @param params
- */
-const checkToken = params => {
-  return fetch({
-    url: '',
-    method: 'get',
-    params: params
-  })
-}
 const apiList = {
   Login,
   recordUpdate,
@@ -201,6 +170,7 @@ const apiList = {
   statistics,
   syncQnventory,
   saleList,
+  transportList,
   inventoryList,
   recordList,
   recordExcelList,
@@ -213,9 +183,7 @@ const apiList = {
   wareroomUpdate,
   productDelete,
   wareroomDelete,
-  userList,
-  postUserInfo,
-  checkToken
+  userList
 }
 
 export default apiList
